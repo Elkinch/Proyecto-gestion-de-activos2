@@ -1,0 +1,198 @@
+/* ========== css/dashboard.css ========== */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 20px;
+  padding: 1.2rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  border: 1px solid #e8edf2;
+  transition: transform 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+}
+
+.stat-icon {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.stat-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1c4e70;
+}
+
+.stat-label {
+  font-size: 0.7rem;
+  color: #8a9bb0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.charts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.chart-container {
+  background: white;
+  border-radius: 20px;
+  padding: 1.2rem;
+  border: 1px solid #e8edf2;
+}
+
+.chart-container h4 {
+  color: #1c4e70;
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.chart-container canvas {
+  max-height: 200px;
+}
+
+.notifications-section {
+  margin-bottom: 2rem;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #1a2c3e;
+}
+
+.btn-outline-sm {
+  background: transparent;
+  border: 1px solid #cbd5e1;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-outline-sm:hover {
+  background: #f0f2f5;
+  border-color: #1c4e70;
+}
+
+.notifications-list {
+  background: white;
+  border-radius: 20px;
+  border: 1px solid #e8edf2;
+  overflow: hidden;
+}
+
+.notification-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid #f0f2f5;
+  transition: background 0.2s;
+}
+
+.notification-item:last-child {
+  border-bottom: none;
+}
+
+.notification-item.unread {
+  background: #f0f7ff;
+  border-left: 3px solid #1c4e70;
+}
+
+.notification-item.leida {
+  background: #f8fafc;
+  opacity: 0.8;
+}
+
+.notification-item.leida .notif-title {
+  color: #6c7a8a;
+}
+
+.notification-item.leida .notif-desc {
+  color: #8a9bb0;
+}
+
+.leida-badge {
+  background: #eef2f5 !important;
+  color: #6c7a8a !important;
+  font-size: 0.65rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.notif-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #eef3fc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: #1c4e70;
+  flex-shrink: 0;
+}
+
+.notif-content {
+  flex: 1;
+}
+
+.notif-title {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #1a2c3e;
+}
+
+.notif-desc {
+  font-size: 0.8rem;
+  color: #6c7a8a;
+}
+
+.notif-fecha {
+  font-size: 0.65rem;
+  color: #8a9bb0;
+  margin-top: 0.2rem;
+}
+
+.btn-icon {
+  background: #1d7d6e;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.2rem 0.6rem;
+  cursor: pointer;
+  font-size: 0.7rem;
+  font-weight: 600;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.btn-icon:hover {
+  background: #155a4e;
+  transform: scale(1.05);
+}
+
+.btn-icon:active {
+  transform: scale(0.95);
+}

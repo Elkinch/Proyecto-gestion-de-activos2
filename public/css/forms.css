@@ -1,0 +1,161 @@
+/* ========== css/forms.css ========== */
+.filtros-bar {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.filtros-bar input,
+.filtros-bar select {
+  padding: 0.5rem 1rem;
+  border-radius: 40px;
+  border: 1px solid #cbd5e1;
+  flex: 1;
+  min-width: 120px;
+  font-size: 0.8rem;
+  transition: border-color 0.2s;
+}
+
+.filtros-bar input:focus,
+.filtros-bar select:focus {
+  outline: none;
+  border-color: #1c4e70;
+  box-shadow: 0 0 0 3px rgba(28,78,112,0.1);
+}
+
+.form-container {
+  background: white;
+  border-radius: 24px;
+  border: 1px solid #e8edf2;
+  overflow: hidden;
+}
+
+.form-header {
+  padding: 1.2rem 1.5rem;
+  border-bottom: 1px solid #e8edf2;
+  background: #f8fafc;
+}
+
+.form-header h3 {
+  color: #1c4e70;
+  font-size: 1rem;
+}
+
+.form-header p {
+  font-size: 0.8rem;
+  color: #6c7a8a;
+  margin-top: 0.25rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  padding: 1.5rem;
+}
+
+.full-width {
+  grid-column: span 2;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.field label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #3a5e7a;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.field input,
+.field select,
+.field textarea {
+  padding: 0.6rem 0.8rem;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: #1c4e70;
+  box-shadow: 0 0 0 3px rgba(28,78,112,0.1);
+}
+
+.field input.error,
+.field select.error {
+  border-color: #c7362b;
+  background: #fff5f5;
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.form-actions {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #e8edf2;
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.btn-primary {
+  background: #1c4e70;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 40px;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover {
+  background: #0f3a54;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid #cbd5e1;
+  padding: 0.6rem 1.2rem;
+  border-radius: 40px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-outline:hover {
+  background: #f8fafc;
+  border-color: #1c4e70;
+}
+
+.btn-danger {
+  background: #c7362b;
+  border: none;
+  padding: 0.55rem 1.2rem;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-danger:hover {
+  background: #a82a20;
+  transform: scale(1.02);
+  box-shadow: 0 2px 12px rgba(199, 54, 43, 0.3);
+}

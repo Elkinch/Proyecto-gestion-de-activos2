@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title>ULEAM | Sistema de Gestión de Activos Fijos</title>
+
+    <link rel="stylesheet" href="<%= BASE_URL %>css/styles.css">
+    <link rel="stylesheet" href="<%= BASE_URL %>css/login.css">
+    <link rel="stylesheet" href="<%= BASE_URL %>css/dashboard.css">
+    <link rel="stylesheet" href="<%= BASE_URL %>css/sidebar.css">
+    <link rel="stylesheet" href="<%= BASE_URL %>css/tables.css">
+    <link rel="stylesheet" href="<%= BASE_URL %>css/forms.css">
+    <link rel="stylesheet" href="<%= BASE_URL %>css/modals.css">
+    <link rel="stylesheet" href="<%= BASE_URL %>css/responsive.css">
+  </head>
+  <body>
+    <noscript>
+      <strong>Necesitas habilitar JavaScript para usar esta aplicación.</strong>
+    </noscript>
+
+    <!-- Este contenedor y el modal de detalle no usan directivas Vue,
+         se manejan con JS puro (window.mostrarToast, window.abrirModalDetalle),
+         así que pueden vivir fuera del punto de montaje #app sin problema. -->
+    <div id="toastContainer"></div>
+
+    <div id="modalDetalle" class="modal-overlay" style="display:none;">
+      <div class="modal">
+        <div class="modal-header">
+          <h3>Detalle del Activo</h3>
+          <button class="modal-close" onclick="window.cerrarModalDetalle()">✕</button>
+        </div>
+        <div class="modal-body">
+          <div id="detalleContent" class="detalle-grid">
+            <div style="text-align:center;padding:2rem;color:#8a9bb0">
+              Cargando datos del activo...
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-register" onclick="window.cerrarModalDetalle()">Cerrar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vue monta la app aquí. Todo lo que use v-model, v-if, @click, etc.
+         DEBE estar dentro de este div (o dentro de App.vue), si no, Vue
+         nunca lo compila y esas directivas quedan como texto muerto. -->
+    <div id="app"></div>
+  </body>
+</html>

@@ -1,0 +1,66 @@
+/* ========== css/styles.css ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+  background: #f0f2f5;
+  color: #1a2c3e;
+}
+
+.view {
+  display: none;
+  min-height: 100vh;
+}
+
+.view.active {
+  display: flex;
+}
+
+#toastContainer {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 2000;
+}
+
+.toast {
+  background: #1a2c3e;
+  color: white;
+  padding: 0.75rem 1.25rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  animation: fadeInUp 0.2s ease;
+}
+
+.toast.success { background: #1d7d6e; }
+.toast.error { background: #c7362b; }
+.toast.info { background: #1c4e70; }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.toast .toast-icon {
+  margin-right: 8px;
+}
+
+.page {
+  display: none;
+  animation: fade 0.2s ease;
+}
+
+.page.active-page {
+  display: block;
+}
+
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
