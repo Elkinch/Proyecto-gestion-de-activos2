@@ -20,8 +20,16 @@
 }
 
 .stat-icon {
-  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  color: #1c4e70;
+  opacity: 0.75;
   margin-bottom: 0.5rem;
+}
+
+.stat-icon svg {
+  width: 26px;
+  height: 26px;
 }
 
 .stat-value {

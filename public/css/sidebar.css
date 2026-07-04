@@ -58,10 +58,17 @@
 }
 
 .nav-icon {
-  display: inline-block;
-  width: 24px;
-  text-align: center;
-  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.nav-icon svg {
+  width: 18px;
+  height: 18px;
 }
 
 .user-footer {

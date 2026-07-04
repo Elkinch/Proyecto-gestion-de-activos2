@@ -24,8 +24,8 @@ function getDefaultActivos() {
 
 function getDefaultUsuarios() {
   return [
-    { id: 1, nombres: 'Ing. Administrador Sistema', email: 'admin@uleam.edu.ec', cedula: '', telefono: '', rol: 'admin', facultad: 'FACIT', password: 'Admin123', fechaRegistro: new Date().toISOString(), activo: true, titulo: 'Ing.' },
-    { id: 2, nombres: 'Ing. Gestor Activos', email: 'gestor@uleam.edu.ec', cedula: '', telefono: '', rol: 'gestor', facultad: 'FACIT', password: 'Gestor123', fechaRegistro: new Date().toISOString(), activo: true, titulo: 'Ing.' },
+    { id: 1, nombres: 'Administrador Sistema', email: 'admin@uleam.edu.ec', cedula: '', telefono: '', rol: 'admin', facultad: 'FACIT', password: 'Admin123', fechaRegistro: new Date().toISOString(), activo: true, titulo: '' },
+    { id: 2, nombres: 'Gestor Activos', email: 'gestor@uleam.edu.ec', cedula: '', telefono: '', rol: 'gestor', facultad: 'FACIT', password: 'Gestor123', fechaRegistro: new Date().toISOString(), activo: true, titulo: '' },
     { id: 3, nombres: 'Lcdo. Usuario Regular', email: 'usuario@uleam.edu.ec', cedula: '', telefono: '', rol: 'usuario', facultad: 'FACIT', password: 'Usuario123', fechaRegistro: new Date().toISOString(), activo: true, titulo: 'Lcdo.' }
   ];
 }

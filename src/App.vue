@@ -40,42 +40,42 @@
 
       <div class="nav-section">PRINCIPAL</div>
       <div class="nav-item" :class="{ active: currentPage === 'dashboard' }" @click="cambiarPagina('dashboard')">
-        <span class="nav-icon">D</span> Dashboard
+        <span class="nav-icon" v-html="ICONS.dashboard"></span> Dashboard
       </div>
 
       <div class="nav-section">GESTION</div>
       <div class="nav-item" :class="{ active: currentPage === 'gestionar' }" @click="cambiarPagina('gestionar')">
-        <span class="nav-icon">L</span> Gestion Activos
+        <span class="nav-icon" v-html="ICONS.lista"></span> Gestion Activos
       </div>
       <div class="nav-item" :class="{ active: currentPage === 'agregar' }" @click="cambiarPagina('agregar')">
-        <span class="nav-icon">A</span> Agregar Activo
+        <span class="nav-icon" v-html="ICONS.agregar"></span> Agregar Activo
       </div>
 
       <div class="nav-section" v-if="tienePermiso('gestionar_asignacion')">ASIGNACION</div>
       <div class="nav-item" :class="{ active: currentPage === 'asignacion' }" @click="cambiarPagina('asignacion')" v-if="tienePermiso('gestionar_asignacion')">
-        <span class="nav-icon">R</span> Asignacion de Activos
+        <span class="nav-icon" v-html="ICONS.asignar"></span> Asignacion de Activos
       </div>
 
       <div class="nav-section" v-if="tienePermiso('gestionar_mantenimiento')">MANTENIMIENTO</div>
       <div class="nav-item" :class="{ active: currentPage === 'mantenimiento' }" @click="cambiarPagina('mantenimiento')" v-if="tienePermiso('gestionar_mantenimiento')">
-        <span class="nav-icon">M</span> Mantenimiento
+        <span class="nav-icon" v-html="ICONS.mantenimiento"></span> Mantenimiento
       </div>
 
       <div class="nav-section">INFORMACION</div>
       <div class="nav-item" :class="{ active: currentPage === 'reportes' }" @click="cambiarPagina('reportes')">
-        <span class="nav-icon">R</span> Reportes
+        <span class="nav-icon" v-html="ICONS.reportes"></span> Reportes
       </div>
       <div class="nav-item" :class="{ active: currentPage === 'consultas' }" @click="cambiarPagina('consultas')">
-        <span class="nav-icon">B</span> Busqueda Avanzada
+        <span class="nav-icon" v-html="ICONS.buscar"></span> Busqueda Avanzada
       </div>
       <!-- HISTORIAL - Solo visible para admin o quien tenga permiso -->
       <div class="nav-item" :class="{ active: currentPage === 'historial' }" @click="cambiarPagina('historial')" v-if="tienePermiso('ver_historial')">
-        <span class="nav-icon">H</span> Historial
+        <span class="nav-icon" v-html="ICONS.historial"></span> Historial
       </div>
 
       <div class="nav-section" v-if="tienePermiso('gestionar_roles')">ADMINISTRACION</div>
       <div class="nav-item" :class="{ active: currentPage === 'roles' }" @click="cambiarPagina('roles')" v-if="tienePermiso('gestionar_roles')">
-        <span class="nav-icon">U</span> Gestion de Roles
+        <span class="nav-icon" v-html="ICONS.roles"></span> Gestion de Roles
       </div>
 
       <div class="user-footer">
@@ -87,7 +87,7 @@
           </div>
         </div>
         <div class="logout-item" @click="cerrarSesion">
-          <span class="nav-icon">S</span> Cerrar Sesion
+          <span class="nav-icon" v-html="ICONS.salir"></span> Cerrar Sesion
         </div>
       </div>
     </aside>
@@ -108,22 +108,22 @@
       <div v-show="currentPage === 'dashboard'" class="page" :class="{ 'active-page': currentPage === 'dashboard' }">
         <div class="stats-grid">
           <div class="stat-card">
-            <div class="stat-icon">T</div>
+            <div class="stat-icon" v-html="ICONS.archivo"></div>
             <div class="stat-value" id="statTotal">{{ totalActivos }}</div>
             <div class="stat-label">Total Activos</div>
           </div>
           <div class="stat-card">
-            <div class="stat-icon">D</div>
+            <div class="stat-icon" v-html="ICONS.check"></div>
             <div class="stat-value" id="statDisp">{{ disponiblesCount }}</div>
             <div class="stat-label">Disponibles</div>
           </div>
           <div class="stat-card">
-            <div class="stat-icon">B</div>
+            <div class="stat-icon" v-html="ICONS.equis"></div>
             <div class="stat-value" id="statBaja">{{ bajaCount }}</div>
             <div class="stat-label">Dados de Baja</div>
           </div>
           <div class="stat-card">
-            <div class="stat-icon">M</div>
+            <div class="stat-icon" v-html="ICONS.mantenimiento"></div>
             <div class="stat-value" id="statMant">{{ mantenimientoCount }}</div>
             <div class="stat-label">En Mantenimiento</div>
           </div>
@@ -961,6 +961,29 @@ import { mostrarToast, animarContador } from './utils.js';
 import { Chart, registerables } from 'chart.js';
 
 Chart.register(...registerables);
+
+// ==================== ICONOS ====================
+// Set de iconos de línea simples (estilo "outline"), sin emojis.
+// Usan currentColor para heredar el color del texto del elemento padre.
+const svgIcon = (inner) =>
+  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`;
+
+const ICONS = {
+  dashboard: svgIcon('<rect x="3" y="3" width="7" height="7" rx="1.2"/><rect x="14" y="3" width="7" height="7" rx="1.2"/><rect x="3" y="14" width="7" height="7" rx="1.2"/><rect x="14" y="14" width="7" height="7" rx="1.2"/>'),
+  lista: svgIcon('<line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>'),
+  agregar: svgIcon('<rect x="3" y="3" width="18" height="18" rx="2.2"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/>'),
+  asignar: svgIcon('<polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/>'),
+  mantenimiento: svgIcon('<circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.2 4.2l2.8 2.8M17 17l2.8 2.8M1 12h4M19 12h4M4.2 19.8l2.8-2.8M17 7l2.8-2.8"/>'),
+  reportes: svgIcon('<line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>'),
+  buscar: svgIcon('<circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>'),
+  historial: svgIcon('<circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/>'),
+  roles: svgIcon('<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>'),
+  salir: svgIcon('<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>'),
+  archivo: svgIcon('<polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/>'),
+  check: svgIcon('<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>'),
+  equis: svgIcon('<circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>')
+};
+
 
 // ==================== FUNCIONES GLOBALES PARA EL MODAL ====================
 window.abrirModalDetalle = function(activoData) {
@@ -2644,7 +2667,8 @@ export default {
       abrirConfirmacion,
       cerrarConfirmacion,
       ejecutarConfirmacion,
-      togglePassword
+      togglePassword,
+      ICONS
     };
   }
 };
