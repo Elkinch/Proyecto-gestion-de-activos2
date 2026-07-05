@@ -1,0 +1,10 @@
+[package]
+name = "elkinch/gestionactivos"
+version = "0.1.1"
+description = "Sistema de Gestion de Activos Fijos ULEAM"
+
+[dependencies]
+"sharrattj/static-web-server" = "^1"
+
+[fs]
+public = "dist"

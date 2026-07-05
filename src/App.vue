@@ -307,7 +307,8 @@
             </div>
             <div class="field full-width">
               <label>Descripcion</label>
-              <textarea v-model="formActivo.descripcion" rows="2" placeholder="Descripcion detallada del activo..."></textarea>
+              <textarea v-model="formActivo.descripcion" rows="2" placeholder="Descripcion detallada del activo..." @blur="validarCampoActivo('descripcion', formActivo.descripcion)"></textarea>
+              <div class="error-msg" :class="{ show: errors.descripcion }">{{ errors.descripcion }}</div>
             </div>
             <div class="field">
               <label>Marca *</label>
@@ -316,15 +317,18 @@
             </div>
             <div class="field">
               <label>Modelo</label>
-              <input v-model="formActivo.modelo" placeholder="EliteBook 840 G8">
+              <input v-model="formActivo.modelo" placeholder="EliteBook 840 G8" @blur="validarCampoActivo('modelo', formActivo.modelo)">
+              <div class="error-msg" :class="{ show: errors.modelo }">{{ errors.modelo }}</div>
             </div>
             <div class="field">
               <label>Color</label>
-              <input v-model="formActivo.color" placeholder="Negro, Plata">
+              <input v-model="formActivo.color" placeholder="Negro, Plata" @blur="validarCampoActivo('color', formActivo.color)">
+              <div class="error-msg" :class="{ show: errors.color }">{{ errors.color }}</div>
             </div>
             <div class="field">
               <label>Serie</label>
-              <input v-model="formActivo.serie" placeholder="SN-XXXXXX">
+              <input v-model="formActivo.serie" placeholder="SN-XXXXXX" @blur="validarCampoActivo('serie', formActivo.serie)">
+              <div class="error-msg" :class="{ show: errors.serie }">{{ errors.serie }}</div>
             </div>
             <div class="field">
               <label>Responsable *</label>
@@ -377,7 +381,8 @@
             </div>
             <div class="field">
               <label>Ubicacion</label>
-              <input v-model="formActivo.ubicacion" placeholder="Aula 3B, Bloque A">
+              <input v-model="formActivo.ubicacion" placeholder="Aula 3B, Bloque A" @blur="validarCampoActivo('ubicacion', formActivo.ubicacion)">
+              <div class="error-msg" :class="{ show: errors.ubicacion }">{{ errors.ubicacion }}</div>
             </div>
           </div>
           <div class="form-actions">
@@ -403,7 +408,8 @@
             </div>
             <div class="field">
               <label>Responsable *</label>
-              <input v-model="asignacion.responsable" placeholder="Nombre del responsable">
+              <input v-model="asignacion.responsable" placeholder="Nombre del responsable" @blur="validarCampoAsignacion('responsable', asignacion.responsable)">
+              <div class="error-msg" :class="{ show: errosAsignacion.responsable }">{{ errosAsignacion.responsable }}</div>
             </div>
             <div class="field">
               <label>Fecha de Asignacion *</label>
@@ -415,7 +421,8 @@
             </div>
             <div class="field full-width">
               <label>Observaciones</label>
-              <textarea v-model="asignacion.observaciones" rows="2" placeholder="Observaciones..."></textarea>
+              <textarea v-model="asignacion.observaciones" rows="2" placeholder="Observaciones..." @blur="validarCampoAsignacion('observaciones', asignacion.observaciones)"></textarea>
+              <div class="error-msg" :class="{ show: errosAsignacion.observaciones }">{{ errosAsignacion.observaciones }}</div>
             </div>
           </div>
           <div class="form-actions">
@@ -488,11 +495,13 @@
             </div>
             <div class="field full-width">
               <label>Descripcion</label>
-              <textarea v-model="mantenimiento.descripcion" rows="2" placeholder="Descripcion del mantenimiento..."></textarea>
+              <textarea v-model="mantenimiento.descripcion" rows="2" placeholder="Descripcion del mantenimiento..." @blur="validarCampoMantenimiento('descripcion', mantenimiento.descripcion)"></textarea>
+              <div class="error-msg" :class="{ show: erroresMantenimiento.descripcion }">{{ erroresMantenimiento.descripcion }}</div>
             </div>
             <div class="field full-width">
               <label>Tecnico Responsable</label>
-              <input v-model="mantenimiento.tecnico" placeholder="Nombre del tecnico">
+              <input v-model="mantenimiento.tecnico" placeholder="Nombre del tecnico" @blur="validarCampoMantenimiento('tecnico', mantenimiento.tecnico)">
+              <div class="error-msg" :class="{ show: erroresMantenimiento.tecnico }">{{ erroresMantenimiento.tecnico }}</div>
             </div>
           </div>
           <div class="form-actions">
@@ -1142,7 +1151,8 @@ export default {
     
     const errors = reactive({
       codigo: '', nombre: '', marca: '', responsable: '', 
-      tipo: '', estado: '', facultad: '', valor: ''
+      tipo: '', estado: '', facultad: '', valor: '',
+      descripcion: '', modelo: '', color: '', serie: '', ubicacion: ''
     });
     
     const filtros = reactive({
@@ -1160,6 +1170,20 @@ export default {
       observaciones: ''
     });
     
+    const errosAsignacion = reactive({ responsable: '', observaciones: '' });
+    
+    const validarCampoAsignacion = (campo, valor) => {
+      if (campo === 'responsable') {
+        errosAsignacion.responsable = (valor && valor.length < 3) ? "Minimo 3 caracteres" : "";
+        return !errosAsignacion.responsable;
+      }
+      if (campo === 'observaciones') {
+        errosAsignacion.observaciones = (valor && valor.length > 300) ? "Maximo 300 caracteres" : "";
+        return !errosAsignacion.observaciones;
+      }
+      return true;
+    };
+    
     const mantenimiento = reactive({
       activoId: '',
       tipo: '',
@@ -1168,6 +1192,20 @@ export default {
       descripcion: '',
       tecnico: ''
     });
+    
+    const erroresMantenimiento = reactive({ descripcion: '', tecnico: '' });
+    
+    const validarCampoMantenimiento = (campo, valor) => {
+      if (campo === 'descripcion') {
+        erroresMantenimiento.descripcion = (valor && valor.length > 300) ? "Maximo 300 caracteres" : "";
+        return !erroresMantenimiento.descripcion;
+      }
+      if (campo === 'tecnico') {
+        erroresMantenimiento.tecnico = (valor && valor.length > 60) ? "Maximo 60 caracteres" : "";
+        return !erroresMantenimiento.tecnico;
+      }
+      return true;
+    };
     
     const consulta = reactive({
       codigo: '',
@@ -1749,6 +1787,41 @@ export default {
             errors.valor = "";
           }
           return !errors.valor;
+        case 'descripcion':
+          if (valor && valor.length > 300) {
+            errors.descripcion = "Maximo 300 caracteres";
+          } else {
+            errors.descripcion = "";
+          }
+          return !errors.descripcion;
+        case 'modelo':
+          if (valor && valor.length > 50) {
+            errors.modelo = "Maximo 50 caracteres";
+          } else {
+            errors.modelo = "";
+          }
+          return !errors.modelo;
+        case 'color':
+          if (valor && valor.length > 30) {
+            errors.color = "Maximo 30 caracteres";
+          } else {
+            errors.color = "";
+          }
+          return !errors.color;
+        case 'serie':
+          if (valor && valor.length > 50) {
+            errors.serie = "Maximo 50 caracteres";
+          } else {
+            errors.serie = "";
+          }
+          return !errors.serie;
+        case 'ubicacion':
+          if (valor && valor.length > 80) {
+            errors.ubicacion = "Maximo 80 caracteres";
+          } else {
+            errors.ubicacion = "";
+          }
+          return !errors.ubicacion;
         default:
           return true;
       }
@@ -1764,6 +1837,11 @@ export default {
       esValido = validarCampoActivo('estado', formActivo.estado) && esValido;
       esValido = validarCampoActivo('facultad', formActivo.facultad) && esValido;
       esValido = validarCampoActivo('valor', formActivo.valor) && esValido;
+      esValido = validarCampoActivo('descripcion', formActivo.descripcion) && esValido;
+      esValido = validarCampoActivo('modelo', formActivo.modelo) && esValido;
+      esValido = validarCampoActivo('color', formActivo.color) && esValido;
+      esValido = validarCampoActivo('serie', formActivo.serie) && esValido;
+      esValido = validarCampoActivo('ubicacion', formActivo.ubicacion) && esValido;
       
       if (formActivo.fechaCompra) {
         const fechaCompra = new Date(formActivo.fechaCompra);
@@ -1801,6 +1879,11 @@ export default {
       errors.estado = '';
       errors.facultad = '';
       errors.valor = '';
+      errors.descripcion = '';
+      errors.modelo = '';
+      errors.color = '';
+      errors.serie = '';
+      errors.ubicacion = '';
     };
     
     const guardarActivo = () => {
@@ -2057,6 +2140,11 @@ export default {
         return;
       }
       
+      if (!validarCampoAsignacion('responsable', asignacion.responsable) || !validarCampoAsignacion('observaciones', asignacion.observaciones)) {
+        mostrarToast("Por favor, revise los campos marcados", "error");
+        return;
+      }
+      
       const fechaAsig = new Date(asignacion.fechaAsignacion);
       const hoy = new Date();
       if (fechaAsig > hoy) {
@@ -2194,6 +2282,11 @@ export default {
       
       if (mantenimiento.costo < 0) {
         mostrarToast("El costo no puede ser negativo", "error");
+        return;
+      }
+      
+      if (!validarCampoMantenimiento('descripcion', mantenimiento.descripcion) || !validarCampoMantenimiento('tecnico', mantenimiento.tecnico)) {
+        mostrarToast("Por favor, revise los campos marcados", "error");
         return;
       }
       
@@ -2584,6 +2677,8 @@ export default {
       filtros,
       asignacion,
       mantenimiento,
+      errosAsignacion,
+      erroresMantenimiento,
       consulta,
       resultadosConsulta,
       consultaSinResultados,
@@ -2648,9 +2743,11 @@ export default {
       verDetalle,
       limpiarAsignacion,
       guardarAsignacion,
+      validarCampoAsignacion,
       devolverActivo,
       limpiarMantenimiento,
       guardarMantenimiento,
+      validarCampoMantenimiento,
       marcarLeida,
       marcarTodasLeidas,
       exportarCSV,

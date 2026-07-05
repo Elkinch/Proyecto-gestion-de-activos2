@@ -1,0 +1,5 @@
+name: proyecto-gestion-de-activos2
+app_id: da_RjPIgtQUXd4d
+owner: elkinch
+package: .
+kind: wasmer.io/App.v0
