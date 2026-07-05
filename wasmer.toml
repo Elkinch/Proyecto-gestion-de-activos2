@@ -1,6 +1,6 @@
 [package]
 name = "elkinch/gestionactivos"
-version = "0.1.1"
+version = "0.1.2"
 description = "Sistema de Gestion de Activos Fijos ULEAM"
 
 [dependencies]

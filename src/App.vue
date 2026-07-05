@@ -47,7 +47,7 @@
       <div class="nav-item" :class="{ active: currentPage === 'gestionar' }" @click="cambiarPagina('gestionar')">
         <span class="nav-icon" v-html="ICONS.lista"></span> Gestion Activos
       </div>
-      <div class="nav-item" :class="{ active: currentPage === 'agregar' }" @click="cambiarPagina('agregar')">
+      <div class="nav-item" :class="{ active: currentPage === 'agregar' }" @click="cambiarPagina('agregar')" v-if="tienePermiso('crear_activos')">
         <span class="nav-icon" v-html="ICONS.agregar"></span> Agregar Activo
       </div>
 
@@ -1700,6 +1700,10 @@ export default {
         mostrarToast("No tiene permisos para gestionar mantenimientos", "error");
         return;
       }
+      if (pagina === 'agregar' && !formActivo.id && !tienePermiso_('crear_activos')) {
+        mostrarToast("No tiene permisos para registrar activos", "error");
+        return;
+      }
       
       if (pagina === currentPage.value) return;
       currentPage.value = pagina;
@@ -1887,6 +1891,16 @@ export default {
     };
     
     const guardarActivo = () => {
+      const esNuevo = !formActivo.id;
+      if (esNuevo && !tienePermiso_('crear_activos')) {
+        mostrarToast("No tiene permisos para registrar activos", "error");
+        return;
+      }
+      if (!esNuevo && !tienePermiso_('editar_activos')) {
+        mostrarToast("No tiene permisos para editar activos", "error");
+        return;
+      }
+      
       if (!validarFormularioCompleto()) {
         mostrarToast("Por favor, complete correctamente todos los campos", "error");
         return;
@@ -1944,7 +1958,21 @@ export default {
       }
       
       limpiarFormulario();
-      cambiarPagina('gestionar');
+      
+      if (esNuevo) {
+        // El activo nuevo se agrega al final del listado. Si hay mas de una
+        // pagina, quedarse en la pagina 1 lo dejaria "invisible". Ademas,
+        // si habia un filtro activo que no coincide con el activo recien
+        // creado, tambien parece que "no se guardo". Se limpian los filtros
+        // y se navega a la ultima pagina, donde queda el nuevo registro.
+        resetearFiltros();
+        currentPage.value = 'gestionar';
+        nextTick(() => {
+          currentGestionPage.value = totalGestionPages.value;
+        });
+      } else {
+        cambiarPagina('gestionar');
+      }
     };
     
     const abrirEditar = (id) => {
